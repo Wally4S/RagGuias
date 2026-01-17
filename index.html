@@ -144,6 +144,7 @@ body{
   background:linear-gradient(135deg,#0f1b2c,#020617);
   box-shadow:0 0 25px rgba(0,255,255,.4);
   transition:.3s;
+  cursor:pointer;
 }
 .card:hover{
   transform:translateY(-4px);
@@ -187,6 +188,7 @@ body{
   background:linear-gradient(135deg,#1a2233,#0f1b2c);
   box-shadow:0 0 18px rgba(0,255,255,.35);
   transition:.3s;
+  cursor:pointer;
 }
 .card-menor:hover{
   transform:translateY(-3px) scale(1.04);
@@ -248,21 +250,21 @@ body{
 
 <div id="cards-container">
   <div class="card-wrapper">
-    <div class="card">
+    <div class="card" data-link="/pagina1">
       <img src="banner1.png">
       <h3>Card 1</h3>
       <p>Guias e informações essenciais</p>
     </div>
   </div>
   <div class="card-wrapper">
-    <div class="card">
+    <div class="card" data-link="/pagina2">
       <img src="banner2.png">
       <h3>Card 2</h3>
       <p>Dicas avançadas e builds</p>
     </div>
   </div>
   <div class="card-wrapper">
-    <div class="card">
+    <div class="card" data-link="/pagina3">
       <img src="banner3.png">
       <h3>Card 3</h3>
       <p>Conteúdo especial do servidor</p>
@@ -271,10 +273,26 @@ body{
 </div>
 
 <div id="cards-menores">
-  <div class="card-menor"><img src="bannermini1.png"><h4>Evento Roleta</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="bannermini2.png"><h4>Visuais de Malangdo</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="bannermini3.png"><h4>Ragnarok Stars Latam</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="bannermini4.png"><h4>Sistema de Lojas</h4><p>Info rápida</p></div>
+  <div class="card-menor" data-link="/evento-roleta">
+    <img src="bannermini1.png">
+    <h4>Evento Roleta</h4>
+    <p>Info rápida</p>
+  </div>
+  <div class="card-menor" data-link="/visuais-malangdo">
+    <img src="bannermini2.png">
+    <h4>Visuais de Malangdo</h4>
+    <p>Info rápida</p>
+  </div>
+  <div class="card-menor" data-link="/ragnarok-stars-latam">
+    <img src="bannermini3.png">
+    <h4>Ragnarok Stars Latam</h4>
+    <p>Info rápida</p>
+  </div>
+  <div class="card-menor" data-link="/sistema-lojas">
+    <img src="bannermini4.png">
+    <h4>Sistema de Lojas</h4>
+    <p>Info rápida</p>
+  </div>
 </div>
 
 </div>
@@ -304,6 +322,22 @@ document.addEventListener("keydown",e=>{
     inputCode="";
   }
   if(e.key==="Escape") miniPainel.style.display="none";
+});
+
+// Redireciona ao clicar nos cards grandes
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const link = card.getAttribute('data-link');
+    if(link) window.location.href = link;
+  });
+});
+
+// Redireciona ao clicar nos cards menores
+document.querySelectorAll('.card-menor').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const link = card.getAttribute('data-link');
+    if(link) window.location.href = link;
+  });
 });
 </script>
 
