@@ -22,15 +22,31 @@ body{
   box-shadow:0 0 12px rgba(0,240,255,.4)
 }
 #btn-voltar:hover{box-shadow:0 0 22px rgba(0,240,255,.8)}
+
+/* ===== Logo texto com efeito relâmpago ===== */
 #logo-text{
-  font-size:30px;font-weight:900;letter-spacing:3px;
-  background:linear-gradient(90deg,#00f0ff,#7cfbff,#00f0ff);
-  background-size:200%;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:transparent;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:logoGlow 5s linear infinite
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
 }
-@keyframes logoGlow{from{background-position:0%}to{background-position:200%}}
+@keyframes flashLightning{
+  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
+  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
+  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
+  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
+  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
+  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
+  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
+  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+}
 
 /* Search */
 #search-bar{
@@ -171,9 +187,8 @@ body{
 </div>
 
 <script>
-/* ===== PERSONAGENS (1 LINHA POR CLASSE) ===== */
-const characters=[
-{
+/* ===== PERSONAGENS ===== */
+const characters=[{
   name:"Rune",
   img:"img/rk.png",
   lv:175,
@@ -194,8 +209,7 @@ const characters=[
     "Fantasma":"100%",
     "Morto-Vivo":"100%"
   }
-}
-];
+}];
 
 const perPage=6;
 let currentPage=1;
