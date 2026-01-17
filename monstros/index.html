@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RagGuias — Monstros</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#050b18,#0f1b2c);
+  color:#fff;
+}
+#pagina{max-width:1256px;margin:auto;padding:20px}
+
+/* Header */
+#header{display:flex;align-items:center;gap:15px;margin-bottom:25px}
+#btn-voltar{
+  padding:8px 14px;border-radius:10px;border:none;
+  background:#020617;color:#7cfbff;font-weight:bold;cursor:pointer;
+  box-shadow:0 0 12px rgba(0,240,255,.4)
+}
+#btn-voltar:hover{box-shadow:0 0 22px rgba(0,240,255,.8)}
+#logo-text{
+  font-size:30px;font-weight:900;letter-spacing:3px;
+  background:linear-gradient(90deg,#00f0ff,#7cfbff,#00f0ff);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:logoGlow 5s linear infinite
+}
+@keyframes logoGlow{from{background-position:0%}to{background-position:200%}}
+
+/* Search */
+#search-bar{
+  width:100%;padding:14px;margin-bottom:25px;
+  border-radius:14px;border:none;outline:none;
+  background:#020617;color:#fff;font-size:16px;
+  box-shadow:0 0 20px rgba(0,240,255,.3)
+}
+
+/* Grid */
+#monster-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px
+}
+
+/* Card */
+.monster-card{
+  background:linear-gradient(135deg,#0f1b2c,#020617);
+  border-radius:18px;padding:14px;
+  box-shadow:0 0 22px rgba(0,255,255,.35);
+  transition:.3s;display:flex;flex-direction:column
+}
+.monster-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 40px rgba(0,255,255,.6)
+}
+.monster-card img{
+  width:100%;height:160px;object-fit:contain;
+  background:#020617;border-radius:14px;margin-bottom:8px
+}
+.monster-card h3{
+  margin:4px 0 6px;font-size:18px;
+  text-shadow:0 0 8px rgba(0,240,255,.7)
+}
+.monster-info{font-size:13px;line-height:1.6}
+.monster-info span{color:#7cfbff}
+
+/* Buttons */
+.card-actions{
+  display:flex;gap:8px;margin-top:auto
+}
+.card-actions button,
+.card-actions a{
+  flex:1;padding:8px;border-radius:10px;
+  border:none;background:#020617;color:#7cfbff;
+  font-size:13px;text-align:center;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 0 10px rgba(0,240,255,.3)
+}
+.card-actions button:hover,
+.card-actions a:hover{
+  box-shadow:0 0 18px rgba(0,240,255,.7)
+}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;align-items:center;justify-content:center;
+  z-index:999
+}
+.modal.active{display:flex}
+.modal-box{
+  background:linear-gradient(135deg,#020617,#0f1b2c);
+  padding:22px;border-radius:20px;
+  min-width:300px;
+  box-shadow:0 0 40px rgba(0,255,255,.6)
+}
+.modal-box h2{
+  text-align:center;
+  color:#7cfbff;
+  margin-bottom:15px
+}
+
+/* 🔥 ELEMENTOS */
+.element-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px
+}
+.element-item{
+  font-size:12px;
+  padding:6px;
+  border-radius:8px;
+  text-align:center;
+  background:#020617;
+  box-shadow:0 0 8px rgba(255,255,255,.15)
+}
+
+/* Cores por elemento */
+.el-Fogo{color:#ff4d4d}
+.el-Água{color:#4da6ff}
+.el-Vento{color:#4dff88}
+.el-Terra{color:#b38b59}
+.el-Veneno{color:#b84dff}
+.el-Sagrado{color:#ffd84d}
+.el-Sombrio{color:#9ca3af}
+.el-Fantasma{color:#d0b3ff}
+.el-Neutro{color:#ffffff}
+.el-Morto-Vivo{color:#ff944d}
+
+/* Pagination */
+#pagination{
+  display:flex;justify-content:center;
+  gap:10px;margin-top:30px
+}
+.page-btn{
+  padding:8px 14px;border-radius:10px;
+  border:none;background:#020617;color:#fff;
+  cursor:pointer;font-weight:bold
+}
+.page-btn.active{background:#00f0ff;color:#000}
+</style>
+</head>
+
+<body>
+<div id="pagina">
+
+<div id="header">
+  <button id="btn-voltar" onclick="location.href='index.html'">PAGINA INICIAL</button>
+  <div id="logo-text">MVPS & MINI BOSS</div>
+</div>
+
+<input id="search-bar" placeholder="Pesquisar monstro...">
+
+<div id="monster-grid"></div>
+<div id="pagination"></div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <div class="element-list" id="modal-elements"></div>
+  </div>
+</div>
+
+<script>
+/* ===== MONSTROS (1 LINHA POR MVP) ===== */
+const monsters = [
+  { name: "Ifrit", img: "./ifrit.png", lv: 98, hp: "6.660.000", sp: "5.000", race: "Demônio", element: "Fogo", drops: "#", elements: { "Neutro": "100%", "Água": "175%", "Terra": "100%", "Fogo": "25%", "Vento": "75%", "Veneno": "50%", "Sagrado": "100%", "Sombrio": "50%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Gorynych", img: "gorynych.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Vigia do Tempo", img: "vigia-do-tempo.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Amon Ra", img: "amon-ra.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Gemaring", img: "gemaring.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Boitata", img: "boitata.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Atroce", img: "atroce.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },   { name: "Baphomet", img: "https://static.divine-pride.net/images/mobs/png/1039.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+  { name: "Vesper", img: "vesper.png", lv: 81, hp: "2.000.000", sp: "3.000", race: "Demônio", element: "Sombrio", drops: "#", elements: { "Neutro": "100%", "Água": "100%", "Terra": "100%", "Fogo": "100%", "Vento": "100%", "Veneno": "50%", "Sagrado": "175%", "Sombrio": "25%", "Fantasma": "75%", "Morto-Vivo": "50%" } },
+
+];
+
+const perPage = 8;
+let currentPage = 1;
+let filtered = [...monsters];
+
+const grid = document.getElementById("monster-grid");
+const pagination = document.getElementById("pagination");
+
+function render() {
+  grid.innerHTML = "";
+  const start = (currentPage - 1) * perPage;
+  filtered.slice(start, start + perPage).forEach(m => {
+    grid.innerHTML += `
+    <div class="monster-card">
+      <img src="${m.img}">
+      <h3>${m.name}</h3>
+      <div class="monster-info">
+        <div><span>Lv:</span> ${m.lv}</div>
+        <div><span>HP:</span> ${m.hp} | <span>SP:</span> ${m.sp}</div>
+        <div><span>Raça:</span> ${m.race}</div>
+        <div><span>Elemento:</span> ${m.element}</div>
+      </div>
+      <div class="card-actions">
+        <button onclick='openModal("${m.name}",${JSON.stringify(m.elements)})'>Fraqueza</button>
+        <a href="${m.drops}" target="_blank">Drops</a>
+      </div>
+    </div>`;
+  });
+  renderPagination();
+}
+
+function renderPagination() {
+  pagination.innerHTML = "";
+  const pages = Math.ceil(filtered.length / perPage);
+  for (let i = 1; i <= pages; i++) {
+    pagination.innerHTML += `<button class="page-btn ${i === currentPage ? "active" : ""}" onclick="currentPage=${i};render()">${i}</button>`;
+  }
+}
+
+document.getElementById("search-bar").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  filtered = monsters.filter(m => m.name.toLowerCase().includes(q));
+  currentPage = 1;
+  render();
+});
+
+function openModal(name, elements) {
+  document.getElementById("modal-title").textContent = name + " — Dano por Elemento";
+  const list = document.getElementById("modal-elements");
+  list.innerHTML = "";
+  for (const e in elements) {
+    const cls = "el-" + e.replace(" ", "-");
+    list.innerHTML += `<div class="element-item ${cls}">${e}: ${elements[e]}</div>`;
+  }
+  document.getElementById("modal").classList.add("active");
+}
+
+document.getElementById("modal").onclick = e => {
+  if (e.target.id === "modal") e.target.classList.remove("active");
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") document.getElementById("modal").classList.remove("active");
+});
+
+render();
+</script>
+
+</body>
+</html>

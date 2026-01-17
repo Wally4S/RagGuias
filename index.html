@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RagGuias</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#050b18,#0f1b2c);
+  color:#fff;
+}
+
+/* ===== Layout ===== */
+#pagina{
+  max-width:1256px;
+  margin:auto;
+  padding:20px;
+}
+
+/* ===== Header ===== */
+#header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+}
+
+/* Logo texto */
+#logo-text{
+  font-size:36px;
+  font-weight:900;
+  letter-spacing:3px;
+  background:linear-gradient(90deg,#00f0ff,#7cfbff,#00f0ff);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:logoGlow 5s linear infinite;
+  text-shadow:0 0 25px rgba(0,240,255,.7);
+}
+@keyframes logoGlow{
+  from{background-position:0%}
+  to{background-position:200%}
+}
+
+/* ===== Menu ===== */
+#menu-social{display:flex;gap:10px}
+.btn-social{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 0 14px rgba(255,255,255,.25);
+  transition:.3s;
+}
+.btn-social:hover{
+  transform:translateY(-3px) scale(1.06);
+  box-shadow:0 0 30px rgba(255,255,255,.9);
+}
+.btn-facebook{background:#1877f2}
+.btn-discord{background:#7289da}
+.btn-whatsapp{background:#25d366}
+.btn-uptime{background:#ff8800}
+
+/* ===== Streamer HUD ===== */
+#widget-streamer{
+  position:fixed;
+  top:100px;
+  right:20px;
+  width:160px;
+  padding:12px;
+  text-align:center;
+  border-radius:16px;
+  background:linear-gradient(145deg,#1a0f3a,#0b061f);
+  border:2px solid #9146ff;
+  box-shadow:
+    0 0 20px rgba(145,70,255,.7),
+    inset 0 0 15px rgba(255,255,255,.15);
+  animation:hudFloat 3s ease-in-out infinite;
+  z-index:1000;
+}
+@keyframes hudFloat{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+#widget-streamer img{height:26px}
+#widget-streamer span{
+  display:block;
+  margin-top:6px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.online{
+  color:#2dff7a;
+  text-shadow:0 0 12px #2dff7a;
+}
+.offline{
+  color:#ff4d4d;
+  text-shadow:0 0 12px #ff4d4d;
+}
+
+/* ===== Painel secreto ===== */
+#mini-painel{
+  position:fixed;
+  top:190px;
+  right:20px;
+  width:250px;
+  background:#020617;
+  border-radius:16px;
+  padding:16px;
+  display:none;
+  border:2px solid #00f0ff;
+  box-shadow:0 0 35px rgba(0,240,255,.7);
+}
+#mini-painel h3{text-align:center}
+#mini-painel button{
+  width:100%;
+  padding:9px;
+  margin-bottom:6px;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+#mini-painel .online{background:#2dff7a;color:#000}
+#mini-painel .offline{background:#ff4d4d;color:#000}
+
+/* ===== Cards grandes ===== */
+#cards-container{
+  display:flex;
+  gap:15px;
+  margin-top:70px;
+  flex-wrap:wrap;
+}
+.card-wrapper{flex:1 1 calc(33% - 10px)}
+.card{
+  height:270px;
+  padding:10px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#0f1b2c,#020617);
+  box-shadow:0 0 25px rgba(0,255,255,.4);
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 40px rgba(0,255,255,.6);
+}
+.card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+/* ===== TEXTO DOS CARDS (AJUSTE PEDIDO) ===== */
+.card h3{
+  margin:8px 0 2px;
+  font-size:18px;
+  font-weight:700;
+  color:#7cfbff;
+  text-shadow:0 0 8px rgba(0,240,255,.6);
+  transition:.3s;
+}
+.card p{
+  font-size:13px;
+  color:#cbd5f5;
+  opacity:.85;
+}
+.card:hover h3{
+  text-shadow:0 0 14px rgba(0,240,255,.9);
+}
+
+/* ===== Cards menores ===== */
+#cards-menores{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:30px;
+}
+.card-menor{
+  padding:12px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#1a2233,#0f1b2c);
+  box-shadow:0 0 18px rgba(0,255,255,.35);
+  transition:.3s;
+}
+.card-menor:hover{
+  transform:translateY(-3px) scale(1.04);
+  box-shadow:0 0 30px rgba(0,255,255,.6);
+}
+.card-menor img{
+  width:100%;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.card-menor h4{
+  margin:6px 0 2px;
+  color:#7cfbff;
+  text-shadow:0 0 6px rgba(0,240,255,.6);
+}
+.card-menor p{
+  font-size:12px;
+  opacity:.8;
+}
+
+/* ===== Responsivo ===== */
+@media(max-width:900px){
+  #cards-menores{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  #menu-social{flex-direction:column}
+  #cards-container{flex-direction:column}
+  #cards-menores{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div id="pagina">
+
+<div id="header">
+  <div id="logo-text">RagGuias</div>
+  <div id="menu-social">
+    <button class="btn-social btn-facebook" onclick="window.location.href='https://rag-guias.vercel.app/monstros'">MVPS</button>
+    <button class="btn-social btn-discord" onclick="window.location.href='https://rag-guias.vercel.app/personagens'">Classes</button>
+    <button class="btn-social btn-whatsapp" onclick="window.location.href='https://rag-guias.vercel.app/instancias'">Instancias</button>
+    <button class="btn-social btn-uptime" onclick="window.location.href='https://seulink4.com'">???</button>
+  </div>
+</div>
+
+<div id="widget-streamer">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Twitch_logo_2019.svg">
+  <span id="streamerStatus">Offline</span>
+</div>
+
+<div id="mini-painel">
+  <h3>Painel do Streamer</h3>
+  <button class="online" onclick="setStreamerStatus(true)">Online</button>
+  <button class="offline" onclick="setStreamerStatus(false)">Offline</button>
+</div>
+
+<div id="cards-container">
+  <div class="card-wrapper">
+    <div class="card">
+      <img src="banner1.png">
+      <h3>Card 1</h3>
+      <p>Guias e informações essenciais</p>
+    </div>
+  </div>
+  <div class="card-wrapper">
+    <div class="card">
+      <img src="banner2.png">
+      <h3>Card 2</h3>
+      <p>Dicas avançadas e builds</p>
+    </div>
+  </div>
+  <div class="card-wrapper">
+    <div class="card">
+      <img src="banner3.png">
+      <h3>Card 3</h3>
+      <p>Conteúdo especial do servidor</p>
+    </div>
+  </div>
+</div>
+
+<div id="cards-menores">
+  <div class="card-menor"><img src="container.png"><h4>Mini 1</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="container.png"><h4>Mini 2</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="container.png"><h4>Mini 3</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="container.png"><h4>Mini 4</h4><p>Info rápida</p></div>
+</div>
+
+</div>
+
+<script>
+const statusSpan=document.getElementById("streamerStatus");
+const miniPainel=document.getElementById("mini-painel");
+let streamerOnline=localStorage.getItem("streamerStatus")==="true";
+let inputCode="";
+
+function updateStatus(){
+  statusSpan.textContent=streamerOnline?"Online":"Offline";
+  statusSpan.className=streamerOnline?"online":"offline";
+}
+function setStreamerStatus(s){
+  streamerOnline=s;
+  localStorage.setItem("streamerStatus",s);
+  updateStatus();
+}
+updateStatus();
+
+document.addEventListener("keydown",e=>{
+  inputCode+=e.key.toLowerCase();
+  if(inputCode.includes("guia")){
+    miniPainel.style.display="block";
+    inputCode="";
+  }
+  if(e.key==="Escape") miniPainel.style.display="none";
+});
+</script>
+
+</body>
+</html>
