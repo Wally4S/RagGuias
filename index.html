@@ -28,21 +28,29 @@ body{
   padding:10px 20px;
 }
 
-/* Logo texto */
+/* Logo texto com efeito relâmpago */
 #logo-text{
   font-size:36px;
   font-weight:900;
   letter-spacing:3px;
-  background:linear-gradient(90deg,#00f0ff,#7cfbff,#00f0ff);
-  background-size:200%;
+  color:transparent;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:logoGlow 5s linear infinite;
-  text-shadow:0 0 25px rgba(0,240,255,.7);
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
 }
-@keyframes logoGlow{
-  from{background-position:0%}
-  to{background-position:200%}
+@keyframes flashLightning{
+  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
+  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
+  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
+  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
+  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
+  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
+  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
+  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
 }
 
 /* ===== Menu ===== */
@@ -66,48 +74,38 @@ body{
 .btn-whatsapp{background:#25d366}
 .btn-uptime{background:#ff8800}
 
-/* ===== Streamer HUD ===== */
+/* ===== Streamer HUD com status ===== */
 #widget-streamer{
   position:fixed;
   top:100px;
   right:20px;
-  width:160px;
-  padding:12px;
-  text-align:center;
-  border-radius:16px;
-  background:linear-gradient(145deg,#1a0f3a,#0b061f);
-  border:2px solid #9146ff;
-  box-shadow:
-    0 0 20px rgba(145,70,255,.7),
-    inset 0 0 15px rgba(255,255,255,.15);
-  animation:hudFloat 3s ease-in-out infinite;
-  z-index:1000;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  z-index:9999;
 }
-@keyframes hudFloat{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-#widget-streamer img{height:26px}
-#widget-streamer span{
+#widget-streamer img{
+  height:26px;
   display:block;
-  margin-top:6px;
+}
+#streamerStatus{
   font-weight:bold;
-  letter-spacing:1px;
+  text-shadow:0 0 6px rgba(0,255,255,.7);
 }
 .online{
   color:#2dff7a;
-  text-shadow:0 0 12px #2dff7a;
+  text-shadow:0 0 8px #2dff7a, 0 0 12px #2dff7a;
 }
 .offline{
   color:#ff4d4d;
-  text-shadow:0 0 12px #ff4d4d;
+  text-shadow:0 0 8px #ff4d4d, 0 0 12px #ff4d4d;
 }
 
 /* ===== Painel secreto ===== */
 #mini-painel{
   position:fixed;
-  top:190px;
+  top:150px;
   right:20px;
   width:250px;
   background:#020617;
@@ -116,8 +114,9 @@ body{
   display:none;
   border:2px solid #00f0ff;
   box-shadow:0 0 35px rgba(0,240,255,.7);
+  z-index:9998;
 }
-#mini-painel h3{text-align:center}
+#mini-painel h3{text-align:center;margin-bottom:10px;}
 #mini-painel button{
   width:100%;
   padding:9px;
@@ -157,7 +156,7 @@ body{
   border-radius:12px;
 }
 
-/* ===== TEXTO DOS CARDS (AJUSTE PEDIDO) ===== */
+/* ===== TEXTO DOS CARDS ===== */
 .card h3{
   margin:8px 0 2px;
   font-size:18px;
@@ -234,11 +233,13 @@ body{
   </div>
 </div>
 
-<div id="widget-streamer">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Twitch_logo_2019.svg">
+<!-- Widget do streamer com status -->
+<div id="widget-streamer" onclick="window.location.href='https://seulink.com'">
+  <img src="twitch.png" alt="Streamer">
   <span id="streamerStatus">Offline</span>
 </div>
 
+<!-- Painel secreto com status Online/Offline -->
 <div id="mini-painel">
   <h3>Painel do Streamer</h3>
   <button class="online" onclick="setStreamerStatus(true)">Online</button>
@@ -270,10 +271,10 @@ body{
 </div>
 
 <div id="cards-menores">
-  <div class="card-menor"><img src="container.png"><h4>Mini 1</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 2</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 3</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 4</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="bannermini1.png"><h4>Evento Roleta</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="bannermini2.png"><h4>Visuais de Malangdo</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="bannermini3.png"><h4>Ragnarok Stars Latam</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="bannermini4.png"><h4>Sistema de Lojas</h4><p>Info rápida</p></div>
 </div>
 
 </div>
@@ -285,8 +286,8 @@ let streamerOnline=localStorage.getItem("streamerStatus")==="true";
 let inputCode="";
 
 function updateStatus(){
-  statusSpan.textContent=streamerOnline?"Online":"Offline";
-  statusSpan.className=streamerOnline?"online":"offline";
+  statusSpan.textContent = streamerOnline?"Online":"Offline";
+  statusSpan.className = streamerOnline?"online":"offline";
 }
 function setStreamerStatus(s){
   streamerOnline=s;
@@ -295,6 +296,7 @@ function setStreamerStatus(s){
 }
 updateStatus();
 
+// Ativa o painel secreto ao digitar "guia"
 document.addEventListener("keydown",e=>{
   inputCode+=e.key.toLowerCase();
   if(inputCode.includes("guia")){
