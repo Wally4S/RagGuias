@@ -28,21 +28,46 @@ body{
   padding:10px 20px;
 }
 
-/* Logo texto */
+/* ===== Logo texto com efeito de relâmpago máximo ===== */
 #logo-text{
   font-size:36px;
   font-weight:900;
   letter-spacing:3px;
-  background:linear-gradient(90deg,#00f0ff,#7cfbff,#00f0ff);
-  background-size:200%;
+  color:transparent;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:logoGlow 5s linear infinite;
-  text-shadow:0 0 25px rgba(0,240,255,.7);
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
 }
-@keyframes logoGlow{
-  from{background-position:0%}
-  to{background-position:200%}
+
+/* ===== Frase destaque eventos ativos com efeito de relâmpago ===== */
+#evento-destaque{
+  font-size:24px;
+  font-weight:900;
+  text-align:center;
+  color:transparent;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
+  margin:25px 0 15px;
+}
+
+/* Animação de relâmpago aleatório */
+@keyframes flashLightning{
+  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
+  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
+  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
+  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
+  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
+  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
+  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
+  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
 }
 
 /* ===== Menu ===== */
@@ -66,42 +91,32 @@ body{
 .btn-whatsapp{background:#25d366}
 .btn-uptime{background:#ff8800}
 
-/* ===== Streamer HUD ===== */
+/* ===== Streamer HUD Simplificado com Glow e prioridade ===== */
 #widget-streamer{
   position:fixed;
   top:100px;
   right:20px;
-  width:160px;
-  padding:12px;
-  text-align:center;
-  border-radius:16px;
-  background:linear-gradient(145deg,#1a0f3a,#0b061f);
-  border:2px solid #9146ff;
-  box-shadow:
-    0 0 20px rgba(145,70,255,.7),
-    inset 0 0 15px rgba(255,255,255,.15);
-  animation:hudFloat 3s ease-in-out infinite;
-  z-index:1000;
-}
-@keyframes hudFloat{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-#widget-streamer img{height:26px}
-#widget-streamer span{
-  display:block;
-  margin-top:6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 8px;
+  background:transparent;
+  border:none;
+  box-shadow:none;
   font-weight:bold;
-  letter-spacing:1px;
+  color:#fff;
+  z-index:9999;
 }
-.online{
+#widget-streamer img{
+  height:26px;
+}
+#widget-streamer .online{
   color:#2dff7a;
-  text-shadow:0 0 12px #2dff7a;
+  text-shadow: 0 0 5px #2dff7a, 0 0 10px #2dff7a, 0 0 15px #2dff7a;
 }
-.offline{
+#widget-streamer .offline{
   color:#ff4d4d;
-  text-shadow:0 0 12px #ff4d4d;
+  text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d;
 }
 
 /* ===== Painel secreto ===== */
@@ -116,6 +131,7 @@ body{
   display:none;
   border:2px solid #00f0ff;
   box-shadow:0 0 35px rgba(0,240,255,.7);
+  z-index:9999;
 }
 #mini-painel h3{text-align:center}
 #mini-painel button{
@@ -157,7 +173,7 @@ body{
   border-radius:12px;
 }
 
-/* ===== TEXTO DOS CARDS (AJUSTE PEDIDO) ===== */
+/* ===== TEXTO DOS CARDS ===== */
 .card h3{
   margin:8px 0 2px;
   font-size:18px;
@@ -180,7 +196,7 @@ body{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:14px;
-  margin-top:30px;
+  margin-top:15px;
 }
 .card-menor{
   padding:12px;
@@ -234,8 +250,9 @@ body{
   </div>
 </div>
 
+<!-- Widget simplificado com glow -->
 <div id="widget-streamer">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Twitch_logo_2019.svg">
+  <img src="twitch.png" alt="Twitch">
   <span id="streamerStatus">Offline</span>
 </div>
 
@@ -249,31 +266,34 @@ body{
   <div class="card-wrapper">
     <div class="card">
       <img src="banner1.png">
-      <h3>Card 1</h3>
+      <h3>Informações MVPS</h3>
       <p>Guias e informações essenciais</p>
     </div>
   </div>
   <div class="card-wrapper">
     <div class="card">
       <img src="banner2.png">
-      <h3>Card 2</h3>
+      <h3>Guia de Classes</h3>
       <p>Dicas avançadas e builds</p>
     </div>
   </div>
   <div class="card-wrapper">
     <div class="card">
       <img src="banner3.png">
-      <h3>Card 3</h3>
+      <h3>Quest & Instancias</h3>
       <p>Conteúdo especial do servidor</p>
     </div>
   </div>
 </div>
 
+<!-- FRASE DESTAQUE CENTRALIZADA -->
+<div id="evento-destaque">Eventos Ativos</div>
+
 <div id="cards-menores">
-  <div class="card-menor"><img src="container.png"><h4>Mini 1</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 2</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 3</h4><p>Info rápida</p></div>
-  <div class="card-menor"><img src="container.png"><h4>Mini 4</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="minibanner1.png"><h4>Mini 1</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="minibanner2.png"><h4>Mini 2</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="minibanner3.png"><h4>Mini 3</h4><p>Info rápida</p></div>
+  <div class="card-menor"><img src="minibanner4.png"><h4>Mini 4</h4><p>Info rápida</p></div>
 </div>
 
 </div>
@@ -299,6 +319,7 @@ document.addEventListener("keydown",e=>{
   inputCode+=e.key.toLowerCase();
   if(inputCode.includes("guia")){
     miniPainel.style.display="block";
+    miniPainel.style.zIndex="9999";
     inputCode="";
   }
   if(e.key==="Escape") miniPainel.style.display="none";

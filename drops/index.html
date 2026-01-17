@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drops — RagGuias</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background: linear-gradient(135deg,#050b18,#0f1b2c);
+  color: #fff;
+}
+#pagina {
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* Header */
+#header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+#logo-text {
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:transparent;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
+}
+
+/* Efeito de relâmpago aleatório */
+@keyframes flashLightning {
+  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
+  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
+  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
+  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
+  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
+  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
+  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
+  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+}
+
+#btn-voltar {
+  padding:8px 16px;
+  border:none;
+  border-radius:10px;
+  background:#020617;
+  color:#7cfbff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(0,240,255,.4);
+  transition:.3s;
+}
+#btn-voltar:hover {
+  box-shadow:0 0 25px rgba(0,240,255,.8);
+}
+
+#search-bar {
+  width:100%;
+  padding:12px;
+  margin-bottom:20px;
+  border-radius:12px;
+  border:none;
+  outline:none;
+  font-size:16px;
+  background:#020617;
+  color:#fff;
+  box-shadow:0 0 20px rgba(0,240,255,0.3);
+}
+
+/* Grid Cards */
+#mvp-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.mvp-card {
+  background: linear-gradient(135deg,#0f1b2c,#020617);
+  border-radius:16px;
+  padding:14px;
+  box-shadow:0 0 20px rgba(0,255,255,.35);
+  transition:.3s;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.mvp-card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 35px rgba(0,255,255,.6);
+}
+.mvp-card h3 {
+  margin:0;
+  color:#7cfbff;
+  text-shadow:0 0 10px rgba(0,240,255,.6);
+}
+.mvp-card button {
+  padding:6px 12px;
+  border:none;
+  border-radius:10px;
+  background:#020617;
+  color:#7cfbff;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(0,240,255,.3);
+  transition:.3s;
+}
+.mvp-card button:hover {
+  box-shadow:0 0 25px rgba(0,255,255,.7);
+}
+
+/* Modal */
+.modal {
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.modal.active {
+  display:flex;
+}
+.modal-box {
+  background: linear-gradient(135deg,#020617,#0f1b2c);
+  padding:22px;
+  border-radius:20px;
+  max-width:600px;
+  width:90%;
+  max-height:80vh;
+  overflow-y:auto;
+  box-shadow:0 0 40px rgba(0,255,255,.6);
+}
+.modal-box h2 {
+  text-align:center;
+  color:#7cfbff;
+  margin-bottom:15px;
+  text-shadow:0 0 10px rgba(0,240,255,.6);
+}
+.drops-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+.drop-item {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#020617;
+  padding:6px 12px;
+  border-radius:10px;
+  box-shadow:0 0 12px rgba(0,240,255,.35);
+  font-size:14px;
+  transition:.3s;
+  cursor:default;
+}
+.drop-item:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(0,255,255,.6);
+}
+.drop-item img {
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  border-radius:4px;
+}
+
+/* Responsivo */
+@media(max-width:768px){
+  #mvp-grid {grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div id="pagina">
+
+<div id="header">
+  <div id="logo-text">Drops</div>
+  <button id="btn-voltar" onclick="location.href='index.html'">← Página Inicial</button>
+</div>
+
+<input id="search-bar" placeholder="Pesquisar MVP...">
+
+<div id="mvp-grid"></div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <div class="drops-list" id="modal-drops"></div>
+  </div>
+</div>
+
+<script>
+const mvps=[
+  {
+    name:"Bafomé",
+    drops:[
+      {icon:"img/foice.png",name:"Foice"},
+      {icon:"img/carta-bafomet.png",name:"Carta Bafomé"},
+      {icon:"img/oridecon.png",name:"Oridecon"},
+      {icon:"img/armadura.png",name:"Armadura Lendária"},
+      {icon:"img/gema.png",name:"Gema Rara"}
+    ]
+  },
+  {
+    name:"Valkyrie Randgris",
+    drops:[
+      {icon:"img/espada.png",name:"Espada Lendária"},
+      {icon:"img/carta-valkyrie.png",name:"Carta Valkyrie"},
+      {icon:"img/emperium.png",name:"Emperium"}
+    ]
+  },
+  {
+    name:"Drake",
+    drops:[
+      {icon:"img/dagger.png",name:"Adaga"},
+      {icon:"img/carta-drake.png",name:"Carta Drake"}
+    ]
+  }
+];
+
+const grid=document.getElementById("mvp-grid");
+const searchBar=document.getElementById("search-bar");
+const modal=document.getElementById("modal");
+const modalTitle=document.getElementById("modal-title");
+const modalDrops=document.getElementById("modal-drops");
+let filtered=[...mvps];
+
+function render() {
+  grid.innerHTML="";
+  filtered.forEach(mvp=>{
+    const card=document.createElement("div");
+    card.className="mvp-card";
+    card.innerHTML=`<h3>${mvp.name}</h3>
+      <button onclick='openModal("${mvp.name}")'>Detalhes</button>`;
+    grid.appendChild(card);
+  });
+}
+
+function openModal(name){
+  const mvp=mvps.find(m=>m.name===name);
+  modalTitle.textContent=name;
+  modalDrops.innerHTML = mvp.drops.map(d=>`<div class="drop-item"><img src="${d.icon}" alt="${d.name}">${d.name}</div>`).join("");
+  modal.classList.add("active");
+}
+
+// Fechar modal clicando fora
+modal.addEventListener("click", e => {
+  if(e.target.id==="modal") modal.classList.remove("active");
+});
+
+// Fechar modal com Esc
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape") modal.classList.remove("active");
+});
+
+// Busca funcional
+searchBar.addEventListener("input", e=>{
+  const q=e.target.value.toLowerCase();
+  filtered=mvps.filter(mvp=>mvp.name.toLowerCase().includes(q));
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
