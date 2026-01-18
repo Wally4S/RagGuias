@@ -1,281 +1,203 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MVPs & Drops — RagGuias</title>
+<title>RagGuias — Drops de MVP</title>
 
 <style>
-body {
+body{
   margin:0;
   font-family:Arial,sans-serif;
-  background: linear-gradient(135deg,#050b18,#0f1b2c);
-  color: #fff;
+  background:linear-gradient(135deg,#050b18,#0f1b2c);
+  color:#fff;
 }
-#pagina {
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+#pagina{max-width:1200px;margin:auto;padding:20px}
 
 /* Header */
-#header {
+#header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  gap:15px;
+  margin-bottom:25px
 }
-#logo-text {
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:transparent;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
-  background-size: 300% 100%;
-  text-shadow:0 0 10px rgba(0,240,255,0.5);
-  animation:flashLightning 2s infinite;
-}
-
-/* Efeito de relâmpago aleatório */
-@keyframes flashLightning {
-  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
-  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
-  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
-  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
-  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
-  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
-  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
-  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
-  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
-}
-
-#btn-voltar {
-  padding:8px 16px;
-  border:none;
+#btn-voltar{
+  padding:8px 14px;
   border-radius:10px;
+  border:none;
   background:#020617;
   color:#7cfbff;
   font-weight:bold;
   cursor:pointer;
-  box-shadow:0 0 12px rgba(0,240,255,.4);
-  transition:.3s;
+  box-shadow:0 0 12px rgba(0,240,255,.4)
 }
-#btn-voltar:hover {
-  box-shadow:0 0 25px rgba(0,240,255,.8);
+#btn-voltar:hover{
+  box-shadow:0 0 22px rgba(0,240,255,.8)
+}
+#logo-text{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#7cfbff;
+  text-shadow:0 0 12px rgba(0,240,255,.8)
 }
 
-#search-bar {
+/* Search */
+#search{
   width:100%;
-  padding:12px;
-  margin-bottom:20px;
-  border-radius:12px;
+  padding:14px;
+  border-radius:14px;
   border:none;
   outline:none;
-  font-size:16px;
+  margin-bottom:25px;
   background:#020617;
   color:#fff;
-  box-shadow:0 0 20px rgba(0,240,255,0.3);
+  font-size:16px;
+  box-shadow:0 0 20px rgba(0,240,255,.3)
 }
 
-/* Grid Cards */
-#mvp-grid {
+/* MVP LINE */
+.mvp-line{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:16px;
-}
-.mvp-card {
-  background: linear-gradient(135deg,#0f1b2c,#020617);
-  border-radius:16px;
-  padding:14px;
-  box-shadow:0 0 20px rgba(0,255,255,.35);
-  transition:.3s;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.mvp-card:hover {
-  transform:translateY(-3px);
-  box-shadow:0 0 35px rgba(0,255,255,.6);
-}
-.mvp-card h3 {
-  margin:0;
-  color:#7cfbff;
-  text-shadow:0 0 10px rgba(0,240,255,.6);
-}
-.mvp-card button {
-  padding:6px 12px;
-  border:none;
-  border-radius:10px;
-  background:#020617;
-  color:#7cfbff;
-  cursor:pointer;
-  box-shadow:0 0 10px rgba(0,240,255,.3);
-  transition:.3s;
-}
-.mvp-card button:hover {
-  box-shadow:0 0 25px rgba(0,255,255,.7);
+  grid-template-columns:140px 1fr;
+  gap:18px;
+  padding:16px;
+  margin-bottom:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0f1b2c,#020617);
+  box-shadow:0 0 22px rgba(0,255,255,.35)
 }
 
-/* Modal */
-.modal {
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,.85);
-  display:none;
+/* Imagem padrão */
+.mvp-img{
+  width:140px;
+  height:140px;
+  border-radius:16px;
+  background:#020617;
+  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:999;
 }
-.modal.active {
-  display:flex;
+.mvp-img img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
-.modal-box {
-  background: linear-gradient(135deg,#020617,#0f1b2c);
-  padding:22px;
-  border-radius:20px;
-  max-width:600px;
-  width:90%;
-  max-height:80vh;
-  overflow-y:auto;
-  box-shadow:0 0 40px rgba(0,255,255,.6);
-}
-.modal-box h2 {
-  text-align:center;
+
+/* Conteúdo */
+.mvp-content h3{
+  margin:0 0 10px;
+  font-size:20px;
   color:#7cfbff;
-  margin-bottom:15px;
-  text-shadow:0 0 10px rgba(0,240,255,.6);
+  text-shadow:0 0 8px rgba(0,240,255,.6)
 }
-.drops-list {
+
+/* Drops */
+.drops{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
-  justify-content:center;
+  gap:10px
 }
-.drop-item {
+.drop-item{
   display:flex;
   align-items:center;
-  gap:6px;
-  background:#020617;
-  padding:6px 12px;
+  gap:8px;
+  padding:6px 10px;
   border-radius:10px;
-  box-shadow:0 0 12px rgba(0,240,255,.35);
-  font-size:14px;
-  transition:.3s;
-  cursor:default;
+  background:#020617;
+  font-size:13px;
+  box-shadow:0 0 10px rgba(0,240,255,.3)
 }
-.drop-item:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(0,255,255,.6);
-}
-.drop-item img {
-  width:28px;
-  height:28px;
-  object-fit:contain;
-  border-radius:4px;
-}
-
-/* Responsivo */
-@media(max-width:768px){
-  #mvp-grid {grid-template-columns:1fr;}
+.drop-item img{
+  width:26px;
+  height:26px;
+  object-fit:contain
 }
 </style>
 </head>
+
 <body>
 <div id="pagina">
 
 <div id="header">
-  <div id="logo-text">MVPs & Drops</div>
-  <button id="btn-voltar" onclick="location.href='index.html'">← Página Inicial</button>
+  <button id="btn-voltar" onclick="location.href='index.html'">PÁGINA INICIAL</button>
+  <div id="logo-text">DROPS DE MVP</div>
 </div>
 
-<input id="search-bar" placeholder="Pesquisar MVP...">
+<input id="search" placeholder="Pesquisar MVP ou item...">
 
-<div id="mvp-grid"></div>
+<div id="list"></div>
 
-</div>
-
-<!-- Modal -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <h2 id="modal-title"></h2>
-    <div class="drops-list" id="modal-drops"></div>
-  </div>
 </div>
 
 <script>
-const mvps=[
+// 🔥 IMAGEM PADRÃO (troque por qualquer imagem que quiser)
+const imagemPadrao = "https://browiki.org/images/2/26/MvP2.gif";
+
+// 📦 DADOS
+const mvps = [
+  {
+    name:"Ifrit",
+    drops:[ name:"Carta Ifrit", icon:]
+      
+  },
+  {
+    name:"Ktullanux",
+    drops:[
+      { name:"Carta Ktullanux", icon:"https://static.divine-pride.net/images/items/item/4396.png" },
+      { name:"Cajado Glacial", icon:"https://static.divine-pride.net/images/items/item/1624.png" }
+    ]
+  },
   {
     name:"Bafomé",
     drops:[
-      {icon:"img/foice.png",name:"Foice"},
-      {icon:"img/carta-bafomet.png",name:"Carta Bafomé"},
-      {icon:"img/oridecon.png",name:"Oridecon"},
-      {icon:"img/armadura.png",name:"Armadura Lendária"},
-      {icon:"img/gema.png",name:"Gema Rara"}
-    ]
-  },
-  {
-    name:"Valkyrie Randgris",
-    drops:[
-      {icon:"img/espada.png",name:"Espada Lendária"},
-      {icon:"img/carta-valkyrie.png",name:"Carta Valkyrie"},
-      {icon:"img/emperium.png",name:"Emperium"}
-    ]
-  },
-  {
-    name:"Drake",
-    drops:[
-      {icon:"img/dagger.png",name:"Adaga"},
-      {icon:"img/carta-drake.png",name:"Carta Drake"}
+      { name:"Carta Bafomé", icon:"https://static.divine-pride.net/images/items/item/4142.png" },
+      { name:"Foice Sangrenta", icon:"https://static.divine-pride.net/images/items/item/1303.png" }
     ]
   }
 ];
 
-const grid=document.getElementById("mvp-grid");
-const searchBar=document.getElementById("search-bar");
-const modal=document.getElementById("modal");
-const modalTitle=document.getElementById("modal-title");
-const modalDrops=document.getElementById("modal-drops");
-let filtered=[...mvps];
+// Render
+const list = document.getElementById("list");
+const search = document.getElementById("search");
 
-function render() {
-  grid.innerHTML="";
-  filtered.forEach(mvp=>{
-    const card=document.createElement("div");
-    card.className="mvp-card";
-    card.innerHTML=`<h3>${mvp.name}</h3>
-      <button onclick='openModal("${mvp.name}")'>Detalhes</button>`;
-    grid.appendChild(card);
+function render(data){
+  list.innerHTML = "";
+  data.forEach(mvp=>{
+    list.innerHTML += `
+      <div class="mvp-line">
+        <div class="mvp-img">
+          <img src="${imagemPadrao}">
+        </div>
+        <div class="mvp-content">
+          <h3>${mvp.name}</h3>
+          <div class="drops">
+            ${mvp.drops.map(d=>`
+              <div class="drop-item">
+                <img src="${d.icon}">
+                ${d.name}
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
   });
 }
 
-function openModal(name){
-  const mvp=mvps.find(m=>m.name===name);
-  modalTitle.textContent=name;
-  modalDrops.innerHTML = mvp.drops.map(d=>`<div class="drop-item"><img src="${d.icon}" alt="${d.name}">${d.name}</div>`).join("");
-  modal.classList.add("active");
-}
+render(mvps);
 
-// Fechar modal clicando fora
-modal.addEventListener("click", e => {
-  if(e.target.id==="modal") modal.classList.remove("active");
+// Search
+search.addEventListener("input",()=>{
+  const v = search.value.toLowerCase();
+  render(
+    mvps.filter(m =>
+      m.name.toLowerCase().includes(v) ||
+      m.drops.some(d => d.name.toLowerCase().includes(v))
+    )
+  );
 });
-
-// Fechar modal com Esc
-document.addEventListener("keydown", e=>{
-  if(e.key==="Escape") modal.classList.remove("active");
-});
-
-// Busca funcional
-searchBar.addEventListener("input", e=>{
-  const q=e.target.value.toLowerCase();
-  filtered=mvps.filter(mvp=>mvp.name.toLowerCase().includes(q));
-  render();
-});
-
-render();
 </script>
+
 </body>
 </html>
