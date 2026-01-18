@@ -138,12 +138,12 @@ body{
 }
 
 /* Cores */
-.el-Neutro{color:#ffffff}
-.el-Fogo{color:#ff4d4d}
-.el-Água{color:#4da6ff}
-.el-Vento{color:#4dff88}
-.el-Terra{color:#b38b59}
-.el-Veneno{color:#b84dff}
+.el-STR{color:#ffffff}
+.el-VIT{color:#ff4d4d}
+.el-AGI{color:#4da6ff}
+.el-DEX{color:#4dff88}
+.el-INT{color:#b38b59}
+.el-LUK{color:#b84dff}
 .el-Sagrado{color:#ffd84d}
 .el-Sombrio{color:#9ca3af}
 .el-Fantasma{color:#d0b3ff}
@@ -188,30 +188,32 @@ body{
 
 <script>
 /* ===== PERSONAGENS ===== */
-const characters=[{
-  name:"Rune",
-  img:"img/rk.png",
-  lv:175,
-  hp:"120.000",
-  sp:"3.500",
-  class:"Rune Knight",
-  element:"Neutro",
-  link:"#",
-  elements:{
-    "Neutro":"100%",
-    "Fogo":"100%",
-    "Água":"100%",
-    "Vento":"100%",
-    "Terra":"100%",
-    "Veneno":"100%",
-    "Sagrado":"100%",
-    "Sombrio":"100%",
-    "Fantasma":"100%",
-    "Morto-Vivo":"100%"
-  }
-}];
+const characters=[
+  {name:"Cavaleiro Rúnico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rk.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Guardião Real",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rg.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Sentinela",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ra.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Trovador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_m.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Mecânico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Bioquimico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Arcebispo",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ab.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Shura",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sr.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Musa",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_f.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Sicário",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Renegado",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Arcano",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_wl.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Feiticeiro",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_so.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Insurgente",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/gunslinger/job2_gs_002.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Mestre Estelar",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Ceifador de Alma",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_007.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Super Aprendiz",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/supernovice/job2_sn_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Kagerou",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/ninja/job2_nj_002.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Oboro",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/ninja/job2_nj_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Invocador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/summoner/job2_do_021.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+];
 
-const perPage=6;
+/* ===== PERSONAGENS ===== */
+
+const perPage=8;
 let currentPage=1;
 let filtered=[...characters];
 
@@ -227,14 +229,14 @@ function render(){
       <img src="${c.img}">
       <h3>${c.name}</h3>
       <div class="character-info">
-        <div><span>Lv:</span> ${c.lv}</div>
-        <div><span>HP:</span> ${c.hp} | <span>SP:</span> ${c.sp}</div>
-        <div><span>Classe:</span> ${c.class}</div>
-        <div><span>Elemento:</span> ${c.element}</div>
+        <div><span>Função:</span> ${c.lv}</div>
+        <div><span>Dano:</span> ${c.hp}   <span>Defesa:</span> ${c.sp}</div>
+        <div><span>Skills:</span> ${c.class}</div>
+        <div><span>Obs:</span> ${c.element}</div>
       </div>
       <div class="card-actions">
-        <button onclick='openModal("${c.name}",${JSON.stringify(c.elements)})'>Fraqueza</button>
-        <a href="${c.link}" target="_blank">Build</a>
+        <button onclick='openModal("${c.name}",${JSON.stringify(c.elements)})'>Atributos</button>
+        <a href="${c.link}" target="_blank">Referencia</a>
       </div>
     </div>`;
   });
@@ -256,7 +258,7 @@ document.getElementById("search-bar").addEventListener("input",e=>{
 });
 
 function openModal(name,elements){
-  document.getElementById("modal-title").textContent=name+" — Resistência Elemental";
+  document.getElementById("modal-title").textContent=name+" — Atributos";
   const list=document.getElementById("modal-elements");
   list.innerHTML="";
   for(const e in elements){
